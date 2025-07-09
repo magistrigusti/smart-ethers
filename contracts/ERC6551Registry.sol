@@ -38,7 +38,7 @@ contract ERC6551Registry is IERC6551Registry {
 
     address _account = Create2.computeAddress(bytes32(salt), keccak256(code));
 
-    if (_account.code.lengt != 0) return _account;
+    if (_account.code.length != 0) return _account;
 
     assembly {
       _account :=create2(0, add(code, 0x20), mload(code), salt)
