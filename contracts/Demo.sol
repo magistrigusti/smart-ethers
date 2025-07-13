@@ -2,12 +2,15 @@
 pragma solidity ^0.8.28;
 
 contract Demo {
-  event WorkDone(address indexed sender, uint at, uint result);
+  uint public a;
+  address owner;
 
-  uint result;
+  constructor(address _owner) {
+    owner = _owner;
+  }
 
-  function run() public {
-    result = 1 + 2;
-    emit WorkDone(msg.sender, block.timestamp, result);
+  function run(uint _a) external {
+    require(owner == msg.sender, "not an owner!");
+    a = _a;
   }
 }

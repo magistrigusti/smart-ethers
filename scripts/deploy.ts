@@ -1,17 +1,18 @@
-import hre, { ethers } from "hardhat";
+import { ethers } from "hardhat";
 
 async function main() {
-  const [signer, signer2] = await ethers.getSigners();
-  const Factory = await ethers.getContractFactory("Demo");
-  const demo = await Factory.deploy();
+  console.log("DEPLOYING...");
+
+  const [deployer] = await ethers.getSigners();
+
+  const Demo = await ethers.getContractFactory("Demo", deployer);
+  const demo = await Demo.deploy(deployer.address);
   await demo.waitForDeployment();
 
-  console.log(demo);
+  console.log(`Deployed to ${await demo.getAddress()}`);
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  })
+main().catch((error) => {
+  console.error(error);
+  process.exitCode = 1;
+});
