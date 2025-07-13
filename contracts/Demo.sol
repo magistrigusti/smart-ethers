@@ -2,23 +2,12 @@
 pragma solidity ^0.8.28;
 
 contract Demo {
-  address public owner;
-  mapping(address sender => uint amountSent) public transfers;
+  event WorkDone(address indexed sender, uint at, uint result);
 
-  modifier onlyOwner() {
-    require(owner == msg.sender);
-    _;
-  }
+  uint result;
 
-  constructor(address _owner) {
-    owner = _owner;
-  }
-
-  function changeOwner(address _newOwner) external onlyOwner {
-    owner = _newOwner;
-  }
-
-  receive() external payable {
-    transfers[msg.sender] += msg.value;
+  function run() public {
+    result = 1 + 2;
+    emit WorkDone(msg.sender, block.timestamp, result);
   }
 }

@@ -30,13 +30,13 @@ async function main() {
   console.log(`SC balance: ${ethers.formatEther(await provider.getBalance(contractAddr))} ETH`);
   console.log(`mapping: ${await demo.transfers(addr)}`);
 
-  const txChangeOwner = await demo.changeOwner(addr2);
-  await txChangeOwner.wait();
+  // const txChangeOwner = await demo.changeOwner(addr2);
+  // await txChangeOwner.wait();
+  // console.log(`New owner: ${await demo.owner()}`);
 
-  console.log(`New owner: ${await demo.owner()}`);
-
-  const txChangeOwner2 = await demo.changeOwner(addr);
+  const txChangeOwner2 = await demo.connect(signer2).changeOwner(addr);
   await txChangeOwner2.wait();
+  console.log(`New owner: ${await demo.owner()}`);
 }
 
 main()
