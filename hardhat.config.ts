@@ -2,6 +2,7 @@ import "dotenv/config";
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 // import "@matterlabs/hardhat-zksync-toolbox";
+import "./tasks/sample";
 
 const config: HardhatUserConfig = {
   // defaultNetwork: "zkTestnet",
