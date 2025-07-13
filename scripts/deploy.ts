@@ -1,9 +1,13 @@
 import hre, { ethers } from "hardhat";
 
 async function main() {
-  const [ signer ] = await ethers.getSigners();
+  // const [ signer ] = await ethers.getSigners();
 
-  const Factory = await ethers.getContractFactory("Demo");
+  // const Factory = await ethers.getContractFactory("Demo");
+
+  const signer = (await ethers.getSigners())[1];
+
+  const Factory = await ethers.getContractFactory("Demo", signer);
   const demo = await Factory.deploy(await signer.getAddress());
   await demo.waitForDeployment();
 

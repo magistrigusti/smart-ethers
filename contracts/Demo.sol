@@ -14,7 +14,7 @@ contract Demo {
     owner = _owner;
   }
 
-  function changeOwner(address _newOwner) external {
+  function changeOwner(address _newOwner) external onlyOwner {
     owner = _newOwner;
   }
 
